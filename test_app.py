@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
+import plotly.express as px
 
 # Title and description
 st.title('I-Beam Deflection Calculator')
@@ -24,13 +24,11 @@ st.write(f'The deflection at the end of the beam is {delta:.6f} meters.')
 x = np.linspace(0, L, 500)
 y = (w * x**2) * (3 * L - x) / (6 * E * I)
 
-plt.figure(figsize=(10, 6))
-plt.plot(x, y, label='Deflection Curve')
-plt.xlabel('Length Along the Beam (m)')
-plt.ylabel('Deflection (m)')
-plt.title('Deflection Along the Length of the I-Beam')
-plt.grid(True)
-plt.legend()
+fig = px.line(x=x, y=y, labels={'x': 'Length Along the Beam (m)', 'y': 'Deflection (m)'}, title='Deflection Along the Length of the I-Beam')
+fig.update_layout(
+    xaxis_title='Length Along the Beam (m)',
+    yaxis_title='Deflection (m)',
+    title='Deflection Along the Length of the I-Beam'
+)
 
-st.pyplot(plt)
-
+st.plotly_chart(fig)
