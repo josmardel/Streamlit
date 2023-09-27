@@ -2,9 +2,29 @@ import streamlit as st
 import numpy as np
 import plotly.express as px
 
-# Title and description
+# Title and Description
 st.title('I-Beam Deflection Calculator')
-st.write('This app calculates the deflection at the end of an I-beam and plots the deflection along the length of the beam.')
+
+# Documentation
+st.markdown('''
+## Documentation
+
+### What Does This App Do?
+This app calculates the deflection at the end of a cantilevered I-beam under a uniformly distributed load. It also plots the deflection along the length of the beam.
+
+### How to Use the App
+1. **Input Parameters**: Provide the uniformly distributed load (in N/m), length of the beam (in meters), modulus of elasticity of the material (in GPa), and moment of inertia of the I-beam cross-section (in \(m^4\)).
+2. **Results**: The app will display the calculated deflection at the end of the beam.
+3. **Deflection Plot**: An interactive plot will be shown representing the deflection along the length of the beam. You can zoom, pan, and hover over data points for more information.
+
+### Formulas Used for Calculation
+''')
+
+# Display formulas in LaTeX
+st.latex(r'\text{The deflection } \delta \text{ at the end of the beam is calculated as:}')
+st.latex(r'\delta = \frac{w \cdot L^4}{8 \cdot E \cdot I}')
+st.latex(r'\text{The deflection along the length } x \text{ is calculated as:}')
+st.latex(r'\text{Deflection at } x = \frac{w \cdot x^2}{6 \cdot E \cdot I} \left( 3L - x \right)')
 
 # User inputs
 st.header('Input Parameters')
