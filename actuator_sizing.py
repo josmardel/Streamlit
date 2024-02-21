@@ -3,8 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def calculate_traversal_time(stroke_length, max_speed, motor_power):
-    # Assuming a simple relation for acceleration based on motor power
-    acceleration = motor_power * 10  # Placeholder formula
+    acceleration = motor_power * 10  # Placeholder formula for acceleration
 
     d_accel = max_speed**2 / (2 * acceleration)
 
@@ -31,24 +30,20 @@ def plot_motion_profile(stroke_length, max_speed, total_time, acceleration):
     plt.ylabel('Position (mm)')
     plt.title('Motion Profile')
     plt.grid(True)
-    st.pyplot(plt)  # Display the plot in Streamlit
+    st.pyplot(plt)
 
 def plot_speed_profile(max_speed, total_time, acceleration):
     t = np.linspace(0, total_time, 500)
     t_accel = max_speed / acceleration
     t_decel_start = total_time - t_accel
 
-    # Initialize speed array
     speed = np.zeros_like(t)
-
-    # Acceleration phase
     for i in range(len(t)):
         if t[i] < t_accel:
             speed[i] = acceleration * t[i]
         elif t[i] < t_decel_start:
             speed[i] = max_speed
         else:
-            # Deceleration phase
             speed[i] = max_speed - acceleration * (t[i] - t_decel_start)
 
     plt.figure(figsize=(10, 6))
@@ -58,7 +53,6 @@ def plot_speed_profile(max_speed, total_time, acceleration):
     plt.title('Speed Profile')
     plt.grid(True)
     st.pyplot(plt)
-
 
 # Streamlit interface
 st.title('Traversal Time Calculator')
