@@ -29,13 +29,14 @@ def plot_motion_profile(stroke_length, max_speed, total_time, acceleration):
     d = np.minimum(0.5 * acceleration * t**2, stroke_length)
     d = np.minimum(d, stroke_length - 0.5 * acceleration * (total_time - t)**2)
 
-    plt.figure(figsize=(10, 6))
-    plt.plot(t, d)
-    plt.xlabel('Time (s)')
-    plt.ylabel('Position (mm)')
-    plt.title('Motion Profile')
-    plt.grid(True)
-    plt.show()
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.plot(t, d)
+    ax.set_xlabel('Time (s)')
+    ax.set_ylabel('Position (mm)')
+    ax.set_title('Motion Profile')
+    ax.grid(True)
+
+    st.pyplot(fig)
 
 # Streamlit interface
 st.title('Traversal Time Calculator')
